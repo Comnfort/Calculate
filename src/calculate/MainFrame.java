@@ -12,8 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame
+{
 
     public static void main(String[] args) {
         new MainFrame();
@@ -121,12 +123,12 @@ public class MainFrame extends JFrame {
             @Override
             public void insertString(FilterBypass fb, int off, String str, AttributeSet attr)throws BadLocationException
             {
-                fb.insertString(off, str.replaceAll("[^0-9.]", ""), attr);  //включать только цифры и точки
+                fb.insertString(off, str.replaceAll("[^0-9.]", ""), attr);  //включать только цифры и точку
             }
             @Override
             public void replace(FilterBypass fb, int off, int len, String str, AttributeSet attr)throws BadLocationException
             {
-                fb.replace(off, len, str.replaceAll("[^0-9.]", ""), attr);  //включать только цифры и точки
+                fb.replace(off, len, str.replaceAll("[^0-9.]", ""), attr);  //включать только цифры и точку
             }
         });
         txtF.setDocument(doc);
@@ -401,11 +403,12 @@ class Butn extends JButton                 //создание кнопки
     Shape shape;
     public boolean contains(int x, int y)
     {
-        if (shape == null ||
-                !shape.getBounds().equals(getBounds())) {
-            shape = new Ellipse2D.Float(0, 0,
-                    getWidth(), getHeight());
+        if (form==1)
+        {
+            if (shape == null || !shape.getBounds().equals(getBounds())){ shape = new Ellipse2D.Float(0, 0,getWidth(), getHeight());
         }
+        }else {shape = new Rectangle2D.Float(0, 0,getWidth(), getHeight());}
+
         return shape.contains(x, y);
     }
 }
